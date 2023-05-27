@@ -110,15 +110,25 @@ var currentPlayer = 1; // 1 for Player 1, 2 for Player 2
 var game_over = false;
 
 function mouseClicked() {
+  handleGameClick(mouseX, mouseY);
+}
+
+function touchEnded() {
+  // Use the touches array to handle multiple touch points if needed
+  if (touches.length === 1) {
+    handleGameClick(touches[0].x, touches[0].y);
+  }
+}
+
+function handleGameClick(x, y) {
   if (game_over) {
     return; // Do nothing if the game is over
   }
 
   for (let i = 0; i < blocks.length; i++) {
-    if (blocks[i].contains(mouseX, mouseY) && blocks[i].color === "skyblue") {
+    if (blocks[i].contains(x, y) && blocks[i].color === "skyblue") {
       if (currentPlayer === 1) {
         blocks[i].changeColor("red");
-
         currentPlayer = 2; // Switch to Player 2's turn
         checkWin("red"); // Check if player 1 has won
       } else if (currentPlayer === 2) {
@@ -130,7 +140,7 @@ function mouseClicked() {
     }
   }
 }
-// Function to draw lines connecting the winning blocks
+
 
 
 
