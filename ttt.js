@@ -85,25 +85,26 @@ function draw() {
   rectMode(CENTER);
   background("pink");
   Engine.update(engine);
-if(!gamestate){  
-  button.display();
-  textSize(20);
-  fill("red");
-  text("START",30,80);
-  
-}
-  if(mouseIsPressed && button.contains(mouseX,mouseY)){
-    buttonClicked = true;
-    gamestate = true;
+  if (!gamestate) {
+    button.display();
+    textSize(20);
+    fill("red");
+    text("START", 30, 80);
   }
-  if(buttonClicked){
-   showgamegrid();
-  
+
+  if (mouseIsPressed || touches.length > 0) {
+    if (button.contains(mouseX, mouseY) || (touches.length === 1 && button.contains(touches[0].x, touches[0].y))) {
+      buttonClicked = true;
+      gamestate = true;
+    }
+  }
+
+  if (buttonClicked) {
+    showgamegrid();
   }
 
   drawSprites();
-  }
-
+}
   
 
 var currentPlayer = 1; // 1 for Player 1, 2 for Player 2
